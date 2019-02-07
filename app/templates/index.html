@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% for post in posts.items %}
+		{% include '_post.html' %}
+	{% endfor %}
+	{% for page_num in posts.iter_pages() %}
+		{% if page_num %}
+			{% if posts.page == page_num %}
+				<a class="btn btn-dark mb-4" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+			{% else %}
+				<a class="btn btn-outline-dark mb-4" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+			{% endif %}
+		{% else %}
+			...
+		{% endif %}
+	{% endfor %}
+{% endblock %}
